@@ -1,2 +1,6 @@
+machine/Print.java
+ machine.Print
+machine/Coffee.java
+ machine.Coffee
 machine/CoffeeMachine.java
  machine.CoffeeMachine

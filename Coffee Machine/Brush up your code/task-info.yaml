@@ -277,6 +277,378 @@ files:
         }
     }
   learner_created: false
+- name: src/machine/MachineOfCoffee.java
+  visible: true
+  text: |+
+    package machine;
+
+    public class MachineOfCoffee extends Coffee {
+        private int milkV = 0;
+        private int waterV = 0;
+        private int coffeeM = 0;
+        private int disposableCups = 0;
+        private int storedMoney = 0;
+
+        MachineOfCoffee(int waterV, int milkV, int coffeeM, int disposableCups, int storedMoney) {
+            this.waterV = waterV;
+            this.milkV = milkV;
+            this.coffeeM = coffeeM;
+            this.disposableCups = disposableCups;
+            this.storedMoney = storedMoney;
+        }
+
+        public int getWaterV() {
+            return waterV;
+        }
+        public void setWaterV(int waterV) {
+            this.waterV = waterV;
+        }
+
+        public int getMilkV() {
+            return milkV;
+        }
+        public void setMilkV(int milkV) {
+            this.milkV = milkV;
+        }
+
+        public int getCoffeeM() {
+            return coffeeM;
+        }
+        public void setCoffeeM(int coffeeM) {
+            this.coffeeM = coffeeM;
+        }
+
+        public int getDisposableCups() {
+            return disposableCups;
+        }
+        public void setDisposableCups(int disposableCups) {
+            this.disposableCups = disposableCups;
+        }
+
+        public int getStoredMoney() {
+            return storedMoney;
+        }
+        public void setStoredMoney(int storedMoney) {
+            this.storedMoney = storedMoney;
+        }
+
+        public boolean canMakeCoffee(CoffeeType coffeeType, int wantedCups) {
+            boolean canMakeCoffee = true;
+    //        int cupsAvailable = Integer.MAX_VALUE;
+    //        cupsAvailable = waterV / coffeeType.getWaterV();
+    //        if (coffeeType != CoffeeType.ESPRESSO) {
+    //            cupsAvailable = Math.min(cupsAvailable, milkV / coffeeType.getMilkV());
+    //        }
+    //        cupsAvailable = Math.min(cupsAvailable, coffeeM / coffeeType.getCoffeeM());
+    //        if (cupsAvailable < wantedCups) {
+    //            canMakeCoffee = false;
+    //        }
+
+            if (waterV / coffeeType.getWaterV() < 1) {
+                canMakeCoffee = false;
+                System.out.println("Sorry, not enough water!");
+            }
+            if (coffeeType != CoffeeType.ESPRESSO) {
+                if (milkV / coffeeType.getMilkV() < 1) {
+                    canMakeCoffee = false;
+                    System.out.println("Sorry, not enough milk!");
+                }
+            }
+            if (coffeeM / coffeeType.getCoffeeM() < 1) {
+                canMakeCoffee = false;
+                System.out.println("Sorry, not enough coffee!");
+            }
+            if (disposableCups < 1){
+                canMakeCoffee = false;
+                System.out.println("Sorry, not enough cups!");
+            }
+
+            return canMakeCoffee;
+        }
+    }
+
+  learner_created: true
+- name: src/machine/Coffee.java
+  visible: true
+  text: |
+    package machine;
+
+    import java.util.Scanner;
+
+    public abstract class Coffee {
+        final static Scanner scanner;
+        static {
+            scanner = new Scanner(System.in);
+        }
+
+        static void calcIngredients(){
+            System.out.println("Write how many cups of coffee you will need:");
+            int cupsNum = scanner.nextInt();
+            System.out.println("For 25 cups of coffee you will need:");
+            System.out.println(cupsNum * 200 + " ml of water");
+            System.out.println(cupsNum * 50 + " ml of milk");
+            System.out.println(cupsNum * 15 + " g of coffee beans");
+        }
+
+        static void calcNumberOfServings(){
+            System.out.println("Write how many ml of water the coffee machine has:");
+            int milkV = 0;
+            int waterV = 0;
+            int coffeeM = 0;
+            int wantedCups = 0;
+            try{
+                waterV = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many ml of milk the coffee machine has: ");
+                milkV = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many grams of coffee beans the coffee machine has: ");
+                coffeeM = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many cups of coffee you will need: ");
+                wantedCups = Integer.parseInt(scanner.nextLine().trim());
+            }
+            catch (IllegalArgumentException e){
+                System.out.println("please enter a number");
+            }
+
+            int cupsAvailable = waterV / 200;
+            cupsAvailable = Math.min(cupsAvailable, milkV / 50);
+            cupsAvailable = Math.min(cupsAvailable, coffeeM / 15);
+
+            if (cupsAvailable == wantedCups){
+                System.out.println("Yes, I can make that amount of coffee\n");
+            }
+            else if (cupsAvailable < wantedCups){
+                System.out.println("No, I can make only " + cupsAvailable + " cup(s) of coffee");
+            }
+            else {
+                System.out.println("Yes, I can make that amount of coffee (and even " +
+                        (cupsAvailable - wantedCups) + " more than that)");
+            }
+        }
+
+    }
+  learner_created: true
+- name: src/machine/CoffeeType.java
+  visible: true
+  text: |
+    package machine;
+
+    public enum CoffeeType {
+        ESPRESSO(250, 0, 16, 4),
+        LATTE(350, 75, 20, 7),
+        CAPPUCCINO(200, 100, 12, 6),
+        WRONGTYPE(0, 0, 0, 0);
+
+        int milkV;
+        int waterV;
+        int coffeeM;
+        int cost;
+
+        CoffeeType(int waterV,int milkV, int coffeeM, int cost) {
+            this.milkV = milkV;
+            this.waterV = waterV;
+            this.coffeeM = coffeeM;
+            this.cost = cost;
+        }
+
+        public int getWaterV() {
+            return waterV;
+        }
+
+        public int getMilkV() {
+            return milkV;
+        }
+
+        public int getCoffeeM() {
+            return coffeeM;
+        }
+
+        public int getCost() {
+            return cost;
+        }
+    }
+  learner_created: true
+- name: src/machine/Print.java
+  visible: true
+  text: |
+    package machine;
+
+    public class Print {
+        static void printInstructions(){
+            System.out.println("Starting to make a coffee\n" +
+                    "Grinding coffee beans\n" +
+                    "Boiling water\n" +
+                    "Mixing boiled water with crushed coffee beans\n" +
+                    "Pouring coffee into the cup\n" +
+                    "Pouring some milk into the cup\n" +
+                    "Coffee is ready!");
+        }
+
+        static void printMachineStatus(MachineOfCoffee machine){
+            System.out.println();
+            System.out.println("The coffee machine has:");
+            System.out.println(machine.getWaterV() + " ml of water");
+            System.out.println(machine.getMilkV() + " ml of milk");
+            System.out.println(machine.getCoffeeM() + " g of coffee beans");
+            System.out.println(machine.getDisposableCups() + " disposable cups");
+            System.out.println("$" +machine.getStoredMoney() + " of money");
+        }
+    }
+  learner_created: true
+- name: src/machine/Action.java
+  visible: true
+  text: |
+    package machine;
+
+    public enum Action {
+        BUY,
+        FILL,
+        TAKE,
+        REMAINING,
+        EXIT,
+        WRONGACTION;
+    }
+  learner_created: true
+- name: src/machine/RunMachine.java
+  visible: true
+  text: |
+    package machine;
+    import java.util.Locale;
+    import java.util.Scanner;
+
+    import static machine.Coffee.calcIngredients;
+    import static machine.Coffee.calcNumberOfServings;
+    import static machine.Print.printMachineStatus;
+
+    public class RunMachine {
+        final static private Scanner scanner;
+        static {
+            scanner = new Scanner(System.in);
+        }
+        static boolean start(MachineOfCoffee machine){
+            boolean isContinue = true;
+            System.out.println();
+            System.out.println("Write action (buy, fill, take, remaining, exit):");
+            String inputAction = scanner.nextLine().trim().toUpperCase();
+            Action action = Action.WRONGACTION;
+            try {
+                action = Action.valueOf(inputAction);
+            }
+            catch (IllegalArgumentException e){
+                System.out.println("check input");
+            }
+
+            switch (action){
+                case BUY:
+                    Buy(machine);
+                    break;
+                case FILL:
+                    Fill(machine);
+                    break;
+                case TAKE:
+                    Take(machine);
+                    break;
+                case REMAINING:
+                    printMachineStatus(machine);
+                    break;
+                case EXIT:
+                    isContinue = false;
+                    break;
+                case WRONGACTION:
+                    break;
+                default:
+                    break;
+            }
+
+            return isContinue;
+        }
+
+        private static void Buy(MachineOfCoffee machine){
+            System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("back")){
+                start(machine);
+            }
+            int option = 0;
+            try {
+                option = Integer.parseInt(input);
+            }
+            catch (IllegalArgumentException e){
+                System.out.println("enter a number");
+            }
+            switch (option){
+                case 1:
+                    tryBuyCoffee(machine, CoffeeType.ESPRESSO, 1);
+                    break;
+                case 2:
+                    tryBuyCoffee(machine, CoffeeType.LATTE, 1);
+                    break;
+                case 3:
+                    tryBuyCoffee(machine, CoffeeType.CAPPUCCINO, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+            wantedCups = 1;
+            if (machine.canMakeCoffee(coffeeType, wantedCups)){
+                buyCoffee(machine, coffeeType, wantedCups);
+                System.out.println("I have enough resources, making you a coffee!");
+            }
+        }
+        private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+            machine.setWaterV(machine.getWaterV() - wantedCups * coffeeType.getWaterV());
+            machine.setMilkV(machine.getMilkV() - wantedCups * coffeeType.getMilkV());
+            machine.setCoffeeM(machine.getCoffeeM() - wantedCups * coffeeType.getCoffeeM());
+            machine.setDisposableCups(machine.getDisposableCups() - wantedCups);
+            machine.setStoredMoney(machine.getStoredMoney() +  wantedCups * coffeeType.getCost());
+        }
+        private static void buyEspresso(){
+
+        }
+        private static void buyLatte(){
+
+        }
+        private static void buyCappuccino(){
+        }
+
+        private static void Fill(MachineOfCoffee machine){
+
+            System.out.println("Write how many ml of water you want to add:");
+            int waterV = 0;
+            int milkV = 0;
+            int coffeeM = 0;
+            int disposableCups = 0;
+            try {
+                waterV = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many ml of milk you want to add:");
+                milkV = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many grams of coffee beans you want to add:");
+                coffeeM = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println("Write how many disposable cups of coffee you want to add:");
+                disposableCups = Integer.parseInt(scanner.nextLine().trim());
+            }
+            catch (IllegalArgumentException e){
+                System.out.println("enter a valid value");
+            }
+            machine.setWaterV(machine.getWaterV() + waterV);
+            machine.setMilkV(machine.getMilkV() + milkV);
+            machine.setCoffeeM(machine.getCoffeeM() + coffeeM);
+            machine.setDisposableCups(machine.getDisposableCups() + disposableCups);
+        }
+
+        private static void Take(MachineOfCoffee machine){
+            if (machine.getStoredMoney() > 0){
+                System.out.println("I gave you $" + machine.getStoredMoney());
+                machine.setStoredMoney(0);
+            }
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/33/stages/180/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Tue, 08 Jun 2021 20:57:18 UTC
 record: -1

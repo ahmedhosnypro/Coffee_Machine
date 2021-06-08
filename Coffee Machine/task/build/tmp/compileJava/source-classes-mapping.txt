@@ -4,3 +4,5 @@ machine/Coffee.java
  machine.Coffee
 machine/CoffeeMachine.java
  machine.CoffeeMachine
+machine/MachineOfCoffee.java
+ machine.MachineOfCoffee

@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 import static machine.Coffee.calcIngredients;
 import static machine.Coffee.calcNumberOfServings;
+import static machine.Print.printMachineStatus;
+import static machine.RunMachine.*;
 
 public class CoffeeMachine {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        calcNumberOfServings();
+        start();
     }
 }

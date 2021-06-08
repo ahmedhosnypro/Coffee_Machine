@@ -1,8 +1,15 @@
-machine/Print.java
- machine.Print
 machine/Coffee.java
  machine.Coffee
+machine/Action.java
+ machine.Action
+machine/CoffeeType.java
+ machine.CoffeeType
 machine/CoffeeMachine.java
  machine.CoffeeMachine
+machine/Print.java
+ machine.Print
+machine/RunMachine.java
+ machine.RunMachine
+ machine.RunMachine$1
 machine/MachineOfCoffee.java
  machine.MachineOfCoffee

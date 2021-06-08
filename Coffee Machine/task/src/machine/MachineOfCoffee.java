@@ -52,25 +52,34 @@ public class MachineOfCoffee extends Coffee {
 
     public boolean canMakeCoffee(CoffeeType coffeeType, int wantedCups) {
         boolean canMakeCoffee = true;
-        int cupsAvailable = Integer.MAX_VALUE;
-        cupsAvailable = waterV / coffeeType.getWaterV();
-        if (coffeeType != CoffeeType.ESPRESSO){
-            cupsAvailable = Math.min(cupsAvailable, milkV / coffeeType.getMilkV());
-        }
-        cupsAvailable = Math.min(cupsAvailable, coffeeM / coffeeType.getCoffeeM());
+//        int cupsAvailable = Integer.MAX_VALUE;
+//        cupsAvailable = waterV / coffeeType.getWaterV();
+//        if (coffeeType != CoffeeType.ESPRESSO) {
+//            cupsAvailable = Math.min(cupsAvailable, milkV / coffeeType.getMilkV());
+//        }
+//        cupsAvailable = Math.min(cupsAvailable, coffeeM / coffeeType.getCoffeeM());
+//        if (cupsAvailable < wantedCups) {
+//            canMakeCoffee = false;
+//        }
 
-//        if (cupsAvailable == wantedCups){
-////            System.out.println("Yes, I can make that amount of coffee\n");
-//        }
-//        else
-        if (cupsAvailable < wantedCups) {
-//            System.out.println("No, I can make only " + cupsAvailable + " cup(s) of coffee");
+        if (waterV / coffeeType.getWaterV() < 1) {
             canMakeCoffee = false;
+            System.out.println("Sorry, not enough water!");
         }
-//        else {
-//            System.out.println("Yes, I can make that amount of coffee (and even " +
-//                    (cupsAvailable - wantedCups) + " more than that)");
-//        }
+        if (coffeeType != CoffeeType.ESPRESSO) {
+            if (milkV / coffeeType.getMilkV() < 1) {
+                canMakeCoffee = false;
+                System.out.println("Sorry, not enough milk!");
+            }
+        }
+        if (coffeeM / coffeeType.getCoffeeM() < 1) {
+            canMakeCoffee = false;
+            System.out.println("Sorry, not enough coffee!");
+        }
+        if (disposableCups < 1){
+            canMakeCoffee = false;
+            System.out.println("Sorry, not enough cups!");
+        }
 
         return canMakeCoffee;
     }

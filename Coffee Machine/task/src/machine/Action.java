@@ -4,5 +4,7 @@ public enum Action {
     BUY,
     FILL,
     TAKE,
+    REMAINING,
+    EXIT,
     WRONGACTION;
 }

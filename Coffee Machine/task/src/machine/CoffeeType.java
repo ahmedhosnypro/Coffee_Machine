@@ -11,7 +11,7 @@ public enum CoffeeType {
     int coffeeM;
     int cost;
 
-    CoffeeType(int waterV,int milkV, int coffeeM, int cost) {
+    CoffeeType(int waterV, int milkV, int coffeeM, int cost) {
         this.milkV = milkV;
         this.waterV = waterV;
         this.coffeeM = coffeeM;

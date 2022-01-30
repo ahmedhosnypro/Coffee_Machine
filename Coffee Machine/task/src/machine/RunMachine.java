@@ -1,17 +1,17 @@
 package machine;
-import java.util.Locale;
+
 import java.util.Scanner;
 
-import static machine.Coffee.calcIngredients;
-import static machine.Coffee.calcNumberOfServings;
 import static machine.Print.printMachineStatus;
 
 public class RunMachine {
     final static private Scanner scanner;
+
     static {
         scanner = new Scanner(System.in);
     }
-    static boolean start(MachineOfCoffee machine){
+
+    static boolean start(MachineOfCoffee machine) {
         boolean isContinue = true;
         System.out.println();
         System.out.println("Write action (buy, fill, take, remaining, exit):");
@@ -19,12 +19,11 @@ public class RunMachine {
         Action action = Action.WRONGACTION;
         try {
             action = Action.valueOf(inputAction);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("check input");
         }
 
-        switch (action){
+        switch (action) {
             case BUY:
                 Buy(machine);
                 break;
@@ -49,20 +48,19 @@ public class RunMachine {
         return isContinue;
     }
 
-    private static void Buy(MachineOfCoffee machine){
+    private static void Buy(MachineOfCoffee machine) {
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
         String input = scanner.nextLine().trim().toLowerCase();
-        if (input.equals("back")){
+        if (input.equals("back")) {
             start(machine);
         }
         int option = 0;
         try {
             option = Integer.parseInt(input);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("enter a number");
         }
-        switch (option){
+        switch (option) {
             case 1:
                 tryBuyCoffee(machine, CoffeeType.ESPRESSO, 1);
                 break;
@@ -76,30 +74,35 @@ public class RunMachine {
                 break;
         }
     }
-    private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+
+    private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
         wantedCups = 1;
-        if (machine.canMakeCoffee(coffeeType, wantedCups)){
+        if (machine.canMakeCoffee(coffeeType, wantedCups)) {
             buyCoffee(machine, coffeeType, wantedCups);
             System.out.println("I have enough resources, making you a coffee!");
         }
     }
-    private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+
+    private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
         machine.setWaterV(machine.getWaterV() - wantedCups * coffeeType.getWaterV());
         machine.setMilkV(machine.getMilkV() - wantedCups * coffeeType.getMilkV());
         machine.setCoffeeM(machine.getCoffeeM() - wantedCups * coffeeType.getCoffeeM());
         machine.setDisposableCups(machine.getDisposableCups() - wantedCups);
-        machine.setStoredMoney(machine.getStoredMoney() +  wantedCups * coffeeType.getCost());
-    }
-    private static void buyEspresso(){
-
-    }
-    private static void buyLatte(){
-
-    }
-    private static void buyCappuccino(){
+        machine.setStoredMoney(machine.getStoredMoney() + wantedCups * coffeeType.getCost());
     }
 
-    private static void Fill(MachineOfCoffee machine){
+    private static void buyEspresso() {
+
+    }
+
+    private static void buyLatte() {
+
+    }
+
+    private static void buyCappuccino() {
+    }
+
+    private static void Fill(MachineOfCoffee machine) {
 
         System.out.println("Write how many ml of water you want to add:");
         int waterV = 0;
@@ -114,8 +117,7 @@ public class RunMachine {
             coffeeM = Integer.parseInt(scanner.nextLine().trim());
             System.out.println("Write how many disposable cups of coffee you want to add:");
             disposableCups = Integer.parseInt(scanner.nextLine().trim());
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("enter a valid value");
         }
         machine.setWaterV(machine.getWaterV() + waterV);
@@ -124,8 +126,8 @@ public class RunMachine {
         machine.setDisposableCups(machine.getDisposableCups() + disposableCups);
     }
 
-    private static void Take(MachineOfCoffee machine){
-        if (machine.getStoredMoney() > 0){
+    private static void Take(MachineOfCoffee machine) {
+        if (machine.getStoredMoney() > 0) {
             System.out.println("I gave you $" + machine.getStoredMoney());
             machine.setStoredMoney(0);
         }

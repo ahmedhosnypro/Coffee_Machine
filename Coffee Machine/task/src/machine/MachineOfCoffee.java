@@ -18,6 +18,7 @@ public class MachineOfCoffee extends Coffee {
     public int getWaterV() {
         return waterV;
     }
+
     public void setWaterV(int waterV) {
         this.waterV = waterV;
     }
@@ -25,6 +26,7 @@ public class MachineOfCoffee extends Coffee {
     public int getMilkV() {
         return milkV;
     }
+
     public void setMilkV(int milkV) {
         this.milkV = milkV;
     }
@@ -32,6 +34,7 @@ public class MachineOfCoffee extends Coffee {
     public int getCoffeeM() {
         return coffeeM;
     }
+
     public void setCoffeeM(int coffeeM) {
         this.coffeeM = coffeeM;
     }
@@ -39,6 +42,7 @@ public class MachineOfCoffee extends Coffee {
     public int getDisposableCups() {
         return disposableCups;
     }
+
     public void setDisposableCups(int disposableCups) {
         this.disposableCups = disposableCups;
     }
@@ -46,6 +50,7 @@ public class MachineOfCoffee extends Coffee {
     public int getStoredMoney() {
         return storedMoney;
     }
+
     public void setStoredMoney(int storedMoney) {
         this.storedMoney = storedMoney;
     }
@@ -76,7 +81,7 @@ public class MachineOfCoffee extends Coffee {
             canMakeCoffee = false;
             System.out.println("Sorry, not enough coffee!");
         }
-        if (disposableCups < 1){
+        if (disposableCups < 1) {
             canMakeCoffee = false;
             System.out.println("Sorry, not enough cups!");
         }
@@ -84,4 +89,3 @@ public class MachineOfCoffee extends Coffee {
         return canMakeCoffee;
     }
 }
-

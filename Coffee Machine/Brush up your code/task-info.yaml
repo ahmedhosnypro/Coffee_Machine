@@ -279,7 +279,7 @@ files:
   learner_created: false
 - name: src/machine/MachineOfCoffee.java
   visible: true
-  text: |+
+  text: |
     package machine;
 
     public class MachineOfCoffee extends Coffee {
@@ -300,6 +300,7 @@ files:
         public int getWaterV() {
             return waterV;
         }
+
         public void setWaterV(int waterV) {
             this.waterV = waterV;
         }
@@ -307,6 +308,7 @@ files:
         public int getMilkV() {
             return milkV;
         }
+
         public void setMilkV(int milkV) {
             this.milkV = milkV;
         }
@@ -314,6 +316,7 @@ files:
         public int getCoffeeM() {
             return coffeeM;
         }
+
         public void setCoffeeM(int coffeeM) {
             this.coffeeM = coffeeM;
         }
@@ -321,6 +324,7 @@ files:
         public int getDisposableCups() {
             return disposableCups;
         }
+
         public void setDisposableCups(int disposableCups) {
             this.disposableCups = disposableCups;
         }
@@ -328,6 +332,7 @@ files:
         public int getStoredMoney() {
             return storedMoney;
         }
+
         public void setStoredMoney(int storedMoney) {
             this.storedMoney = storedMoney;
         }
@@ -358,7 +363,7 @@ files:
                 canMakeCoffee = false;
                 System.out.println("Sorry, not enough coffee!");
             }
-            if (disposableCups < 1){
+            if (disposableCups < 1) {
                 canMakeCoffee = false;
                 System.out.println("Sorry, not enough cups!");
             }
@@ -366,22 +371,22 @@ files:
             return canMakeCoffee;
         }
     }
-
   learner_created: true
 - name: src/machine/Coffee.java
   visible: true
-  text: |
+  text: |-
     package machine;
 
     import java.util.Scanner;
 
     public abstract class Coffee {
         final static Scanner scanner;
+
         static {
             scanner = new Scanner(System.in);
         }
 
-        static void calcIngredients(){
+        static void calcIngredients() {
             System.out.println("Write how many cups of coffee you will need:");
             int cupsNum = scanner.nextInt();
             System.out.println("For 25 cups of coffee you will need:");
@@ -390,13 +395,13 @@ files:
             System.out.println(cupsNum * 15 + " g of coffee beans");
         }
 
-        static void calcNumberOfServings(){
+        static void calcNumberOfServings() {
             System.out.println("Write how many ml of water the coffee machine has:");
             int milkV = 0;
             int waterV = 0;
             int coffeeM = 0;
             int wantedCups = 0;
-            try{
+            try {
                 waterV = Integer.parseInt(scanner.nextLine().trim());
                 System.out.println("Write how many ml of milk the coffee machine has: ");
                 milkV = Integer.parseInt(scanner.nextLine().trim());
@@ -404,8 +409,7 @@ files:
                 coffeeM = Integer.parseInt(scanner.nextLine().trim());
                 System.out.println("Write how many cups of coffee you will need: ");
                 wantedCups = Integer.parseInt(scanner.nextLine().trim());
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("please enter a number");
             }
 
@@ -413,13 +417,11 @@ files:
             cupsAvailable = Math.min(cupsAvailable, milkV / 50);
             cupsAvailable = Math.min(cupsAvailable, coffeeM / 15);
 
-            if (cupsAvailable == wantedCups){
+            if (cupsAvailable == wantedCups) {
                 System.out.println("Yes, I can make that amount of coffee\n");
-            }
-            else if (cupsAvailable < wantedCups){
+            } else if (cupsAvailable < wantedCups) {
                 System.out.println("No, I can make only " + cupsAvailable + " cup(s) of coffee");
-            }
-            else {
+            } else {
                 System.out.println("Yes, I can make that amount of coffee (and even " +
                         (cupsAvailable - wantedCups) + " more than that)");
             }
@@ -429,7 +431,7 @@ files:
   learner_created: true
 - name: src/machine/CoffeeType.java
   visible: true
-  text: |
+  text: |-
     package machine;
 
     public enum CoffeeType {
@@ -443,7 +445,7 @@ files:
         int coffeeM;
         int cost;
 
-        CoffeeType(int waterV,int milkV, int coffeeM, int cost) {
+        CoffeeType(int waterV, int milkV, int coffeeM, int cost) {
             this.milkV = milkV;
             this.waterV = waterV;
             this.coffeeM = coffeeM;
@@ -469,11 +471,11 @@ files:
   learner_created: true
 - name: src/machine/Print.java
   visible: true
-  text: |
+  text: |-
     package machine;
 
     public class Print {
-        static void printInstructions(){
+        static void printInstructions() {
             System.out.println("Starting to make a coffee\n" +
                     "Grinding coffee beans\n" +
                     "Boiling water\n" +
@@ -483,20 +485,20 @@ files:
                     "Coffee is ready!");
         }
 
-        static void printMachineStatus(MachineOfCoffee machine){
+        static void printMachineStatus(MachineOfCoffee machine) {
             System.out.println();
             System.out.println("The coffee machine has:");
             System.out.println(machine.getWaterV() + " ml of water");
             System.out.println(machine.getMilkV() + " ml of milk");
             System.out.println(machine.getCoffeeM() + " g of coffee beans");
             System.out.println(machine.getDisposableCups() + " disposable cups");
-            System.out.println("$" +machine.getStoredMoney() + " of money");
+            System.out.println("$" + machine.getStoredMoney() + " of money");
         }
     }
   learner_created: true
 - name: src/machine/Action.java
   visible: true
-  text: |
+  text: |-
     package machine;
 
     public enum Action {
@@ -510,8 +512,9 @@ files:
   learner_created: true
 - name: src/machine/RunMachine.java
   visible: true
-  text: |
+  text: |-
     package machine;
+
     import java.util.Locale;
     import java.util.Scanner;
 
@@ -521,10 +524,12 @@ files:
 
     public class RunMachine {
         final static private Scanner scanner;
+
         static {
             scanner = new Scanner(System.in);
         }
-        static boolean start(MachineOfCoffee machine){
+
+        static boolean start(MachineOfCoffee machine) {
             boolean isContinue = true;
             System.out.println();
             System.out.println("Write action (buy, fill, take, remaining, exit):");
@@ -532,12 +537,11 @@ files:
             Action action = Action.WRONGACTION;
             try {
                 action = Action.valueOf(inputAction);
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("check input");
             }
 
-            switch (action){
+            switch (action) {
                 case BUY:
                     Buy(machine);
                     break;
@@ -562,20 +566,19 @@ files:
             return isContinue;
         }
 
-        private static void Buy(MachineOfCoffee machine){
+        private static void Buy(MachineOfCoffee machine) {
             System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
             String input = scanner.nextLine().trim().toLowerCase();
-            if (input.equals("back")){
+            if (input.equals("back")) {
                 start(machine);
             }
             int option = 0;
             try {
                 option = Integer.parseInt(input);
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("enter a number");
             }
-            switch (option){
+            switch (option) {
                 case 1:
                     tryBuyCoffee(machine, CoffeeType.ESPRESSO, 1);
                     break;
@@ -589,30 +592,35 @@ files:
                     break;
             }
         }
-        private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+
+        private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
             wantedCups = 1;
-            if (machine.canMakeCoffee(coffeeType, wantedCups)){
+            if (machine.canMakeCoffee(coffeeType, wantedCups)) {
                 buyCoffee(machine, coffeeType, wantedCups);
                 System.out.println("I have enough resources, making you a coffee!");
             }
         }
-        private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups){
+
+        private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
             machine.setWaterV(machine.getWaterV() - wantedCups * coffeeType.getWaterV());
             machine.setMilkV(machine.getMilkV() - wantedCups * coffeeType.getMilkV());
             machine.setCoffeeM(machine.getCoffeeM() - wantedCups * coffeeType.getCoffeeM());
             machine.setDisposableCups(machine.getDisposableCups() - wantedCups);
-            machine.setStoredMoney(machine.getStoredMoney() +  wantedCups * coffeeType.getCost());
-        }
-        private static void buyEspresso(){
-
-        }
-        private static void buyLatte(){
-
-        }
-        private static void buyCappuccino(){
+            machine.setStoredMoney(machine.getStoredMoney() + wantedCups * coffeeType.getCost());
         }
 
-        private static void Fill(MachineOfCoffee machine){
+        private static void buyEspresso() {
+
+        }
+
+        private static void buyLatte() {
+
+        }
+
+        private static void buyCappuccino() {
+        }
+
+        private static void Fill(MachineOfCoffee machine) {
 
             System.out.println("Write how many ml of water you want to add:");
             int waterV = 0;
@@ -627,8 +635,7 @@ files:
                 coffeeM = Integer.parseInt(scanner.nextLine().trim());
                 System.out.println("Write how many disposable cups of coffee you want to add:");
                 disposableCups = Integer.parseInt(scanner.nextLine().trim());
-            }
-            catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("enter a valid value");
             }
             machine.setWaterV(machine.getWaterV() + waterV);
@@ -637,18 +644,18 @@ files:
             machine.setDisposableCups(machine.getDisposableCups() + disposableCups);
         }
 
-        private static void Take(MachineOfCoffee machine){
-            if (machine.getStoredMoney() > 0){
+        private static void Take(MachineOfCoffee machine) {
+            if (machine.getStoredMoney() > 0) {
                 System.out.println("I gave you $" + machine.getStoredMoney());
                 machine.setStoredMoney(0);
             }
         }
     }
   learner_created: true
-feedback_link: https://hyperskill.org/projects/33/stages/180/implement#comment
+feedback_link: https://hyperskill.org/learn/step/5334#comment
 status: Solved
 feedback:
-  message: Well done! You finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
     Academy</a> to continue learning.
-  time: Tue, 08 Jun 2021 20:57:18 UTC
+  time: Sun, 30 Jan 2022 21:54:17 UTC
 record: -1

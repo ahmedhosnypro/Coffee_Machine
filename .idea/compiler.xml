@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="17">
+      <module name="Coffee_Machine.Coffee_Machine-task-build-classes-java.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task-build-generated-sources-annotationProcessor-java.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task-build-generated-sources-headers-java.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task-build-reports-tests.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task-build-test-results.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task-build-tmp.main" target="11" />
+      <module name="Coffee_Machine.Coffee_Machine-task.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Car.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Circle.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Complex_numbers.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Counter.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-In_a_box.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Patient_needs_a_doctor.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Simulating_a_clock.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-The_Robot_class.main" target="11" />
+      <module name="Coffee_Machine.Topics-Instance_methods-Theory.main" target="11" />
+      <module name="Coffee_Machine.util.main" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

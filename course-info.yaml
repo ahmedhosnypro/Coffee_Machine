@@ -8,9 +8,10 @@ summary: 'What can be better than a cup of coffee during a break? A coffee that 
   works with typical products: coffee, milk, sugar, and plastic cups; if it runs out
   of something, it shows a notification. You can get three types of coffee: espresso,
   cappuccino and latte. Since nothing’s for free, it also collects the money.<br/><br/>Learn
-  more at <a href="https://hyperskill.org">https://hyperskill.org/projects/33</a>'
+  more at <a href="https://hyperskill.org/projects/33?utm_source=ide&utm_medium=ide&utm_campaign=ide&utm_content=project-card">https://hyperskill.org/projects/33</a>'
 programming_language: Java
 programming_language_version: 11
 content:
 - Coffee Machine
+- Topics
 mode: Study

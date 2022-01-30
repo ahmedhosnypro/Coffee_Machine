@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/204875/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Tue, 08 Jun 2021 17:38:03 UTC
+update_date: Sun, 30 Jan 2022 22:48:24 UTC
 stages:
 - id: 175
   step: 5329
@@ -34,6 +34,8 @@ topics:
   - title: Printing data
     theory_id: 3749
   1:
+  - title: Write, compile, and run
+    theory_id: 3739
   - title: JVM, JRE, and JDK
     theory_id: 3499
   - title: Introduction to operating systems
@@ -56,8 +58,6 @@ topics:
     theory_id: 5008
   - title: Characters
     theory_id: 3514
-  - title: Write, compile, and run
-    theory_id: 3739
   - title: String
     theory_id: 3523
   - title: Command line overview
@@ -97,12 +97,12 @@ topics:
     theory_id: 6865
   - title: Computer programming
     theory_id: 8739
-  - title: Introduction to OOP
-    theory_id: 3614
   - title: Sizes and ranges
     theory_id: 3532
   - title: Type casting
     theory_id: 3510
+  - title: Introduction to OOP
+    theory_id: 3614
   - title: Calling a method
     theory_id: 10973
   - title: Declaring a method

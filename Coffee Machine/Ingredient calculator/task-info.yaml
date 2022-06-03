@@ -115,10 +115,10 @@ files:
         }
     }
   learner_created: false
-- name: src/machine/Print.java
+- name: src/machine/Coffee.java
   visible: true
   learner_created: true
-- name: src/machine/Coffee.java
+- name: src/machine/Print.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5330#comment

@@ -4,8 +4,11 @@ import java.util.Scanner;
 
 import static machine.Print.printMachineStatus;
 
-public class RunMachine {
-    final static private Scanner scanner;
+public class Machine {
+    private Machine() {
+    }
+
+    private static final Scanner scanner;
 
     static {
         scanner = new Scanner(System.in);
@@ -25,21 +28,19 @@ public class RunMachine {
 
         switch (action) {
             case BUY:
-                Buy(machine);
+                buy(machine);
                 break;
             case FILL:
-                Fill(machine);
+                fill(machine);
                 break;
             case TAKE:
-                Take(machine);
+                take(machine);
                 break;
             case REMAINING:
                 printMachineStatus(machine);
                 break;
             case EXIT:
                 isContinue = false;
-                break;
-            case WRONGACTION:
                 break;
             default:
                 break;
@@ -48,7 +49,7 @@ public class RunMachine {
         return isContinue;
     }
 
-    private static void Buy(MachineOfCoffee machine) {
+    private static void buy(MachineOfCoffee machine) {
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
         String input = scanner.nextLine().trim().toLowerCase();
         if (input.equals("back")) {
@@ -62,47 +63,35 @@ public class RunMachine {
         }
         switch (option) {
             case 1:
-                tryBuyCoffee(machine, CoffeeType.ESPRESSO, 1);
+                tryBuyCoffee(machine, CoffeeType.ESPRESSO);
                 break;
             case 2:
-                tryBuyCoffee(machine, CoffeeType.LATTE, 1);
+                tryBuyCoffee(machine, CoffeeType.LATTE);
                 break;
             case 3:
-                tryBuyCoffee(machine, CoffeeType.CAPPUCCINO, 1);
+                tryBuyCoffee(machine, CoffeeType.CAPPUCCINO);
                 break;
             default:
                 break;
         }
     }
 
-    private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
-        wantedCups = 1;
-        if (machine.canMakeCoffee(coffeeType, wantedCups)) {
-            buyCoffee(machine, coffeeType, wantedCups);
+    private static void tryBuyCoffee(MachineOfCoffee machine, CoffeeType coffeeType) {
+        if (machine.canMakeCoffee(coffeeType)) {
+            buyCoffee(machine, coffeeType);
             System.out.println("I have enough resources, making you a coffee!");
         }
     }
 
-    private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType, int wantedCups) {
-        machine.setWaterV(machine.getWaterV() - wantedCups * coffeeType.getWaterV());
-        machine.setMilkV(machine.getMilkV() - wantedCups * coffeeType.getMilkV());
-        machine.setCoffeeM(machine.getCoffeeM() - wantedCups * coffeeType.getCoffeeM());
-        machine.setDisposableCups(machine.getDisposableCups() - wantedCups);
-        machine.setStoredMoney(machine.getStoredMoney() + wantedCups * coffeeType.getCost());
+    private static void buyCoffee(MachineOfCoffee machine, CoffeeType coffeeType) {
+        machine.setWaterV(machine.getWaterV() - coffeeType.getWaterV());
+        machine.setMilkV(machine.getMilkV() - coffeeType.getMilkV());
+        machine.setCoffeeM(machine.getCoffeeM() - coffeeType.getCoffeeM());
+        machine.setDisposableCups(machine.getDisposableCups() - 1);
+        machine.setStoredMoney(machine.getStoredMoney() + coffeeType.getCost());
     }
 
-    private static void buyEspresso() {
-
-    }
-
-    private static void buyLatte() {
-
-    }
-
-    private static void buyCappuccino() {
-    }
-
-    private static void Fill(MachineOfCoffee machine) {
+    private static void fill(MachineOfCoffee machine) {
 
         System.out.println("Write how many ml of water you want to add:");
         int waterV = 0;
@@ -126,7 +115,7 @@ public class RunMachine {
         machine.setDisposableCups(machine.getDisposableCups() + disposableCups);
     }
 
-    private static void Take(MachineOfCoffee machine) {
+    private static void take(MachineOfCoffee machine) {
         if (machine.getStoredMoney() > 0) {
             System.out.println("I gave you $" + machine.getStoredMoney());
             machine.setStoredMoney(0);

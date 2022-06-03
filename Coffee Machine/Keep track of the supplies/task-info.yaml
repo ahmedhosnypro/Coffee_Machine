@@ -499,7 +499,7 @@ files:
         WRONGACTION;
     }
   learner_created: true
-- name: src/machine/RunMachine.java
+- name: src/machine/Machine.java
   visible: true
   text: |-
     package machine;

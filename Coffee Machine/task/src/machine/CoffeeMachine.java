@@ -1,6 +1,6 @@
 package machine;
 
-import static machine.RunMachine.*;
+import static machine.Machine.*;
 
 public class CoffeeMachine {
     public static void main(String[] args) {
